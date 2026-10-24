@@ -1,5 +1,6 @@
 package com.nidza.inventoryinscription.client;
 
+import com.nidza.inventoryinscription.ClientConfig;
 import com.nidza.inventoryinscription.InventoryInscription;
 import com.nidza.inventoryinscription.network.OpenInscriptionTablePayload;
 import io.redspace.ironsspellbooks.registries.ItemRegistry;
@@ -21,6 +22,8 @@ import java.util.WeakHashMap;
 
 @EventBusSubscriber(modid = InventoryInscription.MOD_ID, value = Dist.CLIENT)
 public final class InventoryScreenEvents {
+    private static final int RECIPE_BUTTON_X = 104;
+    private static final int RECIPE_BUTTON_Y = -22;
     private static final Map<InventoryScreen, JournalButton> BUTTONS = new WeakHashMap<>();
 
     private InventoryScreenEvents() {
@@ -46,11 +49,11 @@ public final class InventoryScreenEvents {
     }
 
     private static int buttonX(InventoryScreen screen) {
-        return screen.getGuiLeft() + 126;
+        return screen.getGuiLeft() + RECIPE_BUTTON_X + ClientConfig.BUTTON_X_OFFSET.get();
     }
 
     private static int buttonY(InventoryScreen screen) {
-        return screen.height / 2 - 22;
+        return screen.height / 2 + RECIPE_BUTTON_Y + ClientConfig.BUTTON_Y_OFFSET.get();
     }
 
     private static final class JournalButton extends ImageButton {

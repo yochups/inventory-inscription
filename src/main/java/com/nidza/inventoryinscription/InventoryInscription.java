@@ -2,6 +2,8 @@ package com.nidza.inventoryinscription;
 
 import com.nidza.inventoryinscription.network.OpenInscriptionTablePayload;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
@@ -9,8 +11,9 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 public final class InventoryInscription {
     public static final String MOD_ID = "inventory_inscription";
 
-    public InventoryInscription(IEventBus modEventBus) {
+    public InventoryInscription(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(InventoryInscription::registerPayloads);
+        modContainer.registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
     }
 
     private static void registerPayloads(RegisterPayloadHandlersEvent event) {
